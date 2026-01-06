@@ -11,7 +11,7 @@ This project demonstrates authentication, role-based access control, and rate li
 - Password hashing with bcrypt
 - JWT-based authentication
 - Role-based access control (user vs admin)
-- Rate limiting on authentication endpoints
+- In-memory rate limiting on authentication endpoints to mitigate abuse
 - PostgreSQL-backed persistence
 
 ---

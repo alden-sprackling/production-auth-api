@@ -4,10 +4,12 @@ import jwt from 'jsonwebtoken';
 
 import db from '../db/index.js';
 import { jwtSecret } from '../config/env.js';
+import { rateLimit } from '../middleware/rateLimit.js';
+
 
 const router = express.Router();
 
-router.post('/register', async (req, res) => {
+router.post('/register', rateLimit, async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
@@ -35,7 +37,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', rateLimit, async (req, res) => {
   try {
     const { email, password } = req.body;
 
