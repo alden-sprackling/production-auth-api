@@ -59,11 +59,15 @@ Users table includes:
 3. Create a `.env` file
    ```bash
    PORT=3000
-   DATABASE_URL=postgresql://user:password@localhost:5432/auth_api
+   DATABASE_URL=postgresql://user@localhost:5432/auth_api
    JWT_SECRET=your_secret_key
    ```
-4. Initialize the database using `schema.sql`
+4. Create the database and apply the schema
+   ```bash
+   createdb auth_api
+   psql auth_api < src/db/schema.sql
+   ```
 5. Start the server
-   ``` bash
+   ```bash
    npm run dev
    ```
