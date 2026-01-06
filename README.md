@@ -55,3 +55,15 @@ Users table includes:
 2. Install dependencies
    ```bash
    npm install
+   ```
+3. Create a `.env` file
+   ```bash
+   PORT=3000
+   DATABASE_URL=postgresql://user:password@localhost:5432/auth_api
+   JWT_SECRET=your_secret_key
+   ```
+4. Initialize the database using `schema.sql`
+5. Start the server
+   ``` bash
+   npm run dev
+   ```
