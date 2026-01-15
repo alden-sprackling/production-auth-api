@@ -11,24 +11,25 @@ const router = express.Router();
 
 router.post('/register', rateLimit, async (req, res) => {
   try {
-    const { email, password, role } = req.body;
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'email and password are required' });
     }
 
-    const safeRole = role === 'admin' ? 'admin' : 'user';
     const passwordHash = await bcrypt.hash(password, 12);
 
+    // All new accounts are regular users by default
     const result = await db.query(
       `INSERT INTO users (email, password_hash, role)
-       VALUES ($1, $2, $3)
-       RETURNING id, email, role, created_at`,
-      [email.toLowerCase(), passwordHash, safeRole]
+      VALUES ($1, $2, $3)
+      RETURNING id, email, role, created_at`,
+      [email.toLowerCase(), passwordHash, 'user']
     );
 
     res.status(201).json({ user: result.rows[0] });
   } catch (err) {
+    // Unique violation for email
     if (err.code === '23505') {
       return res.status(409).json({ error: 'email already exists' });
     }

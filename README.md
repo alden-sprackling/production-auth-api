@@ -64,7 +64,9 @@ Users table includes:
    ```
 4. Create the database and apply the schema
    ```bash
-   createdb auth_api
+   psql postgres
+   CREATE DATABASE auth_api;
+   \q
    psql auth_api < src/db/schema.sql
    ```
 5. Start the server
